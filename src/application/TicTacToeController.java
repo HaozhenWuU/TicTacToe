@@ -3,14 +3,17 @@ package application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
-public class SampleController {
+public class TicTacToeController extends Main{
 	
 
 	Button[] btns = new Button[9];
@@ -85,7 +88,16 @@ public class SampleController {
 
 
 	}
-
+	public void quit(){
+		try {
+			Pane root = (Pane) FXMLLoader.load(getClass().getResource("Home.fxml"));
+			Scene scene = new Scene(root,600,600);
+			rootStage.setScene(scene);
+			rootStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public void buttonOneEventHandler(){
 		putCharacter(one);
 	}
@@ -113,6 +125,10 @@ public class SampleController {
 	public void buttonNineEventHandler(){
 		putCharacter(nine);
 	}
+	public void quitButtonHandler(){quit();};
+
+
+
 	@FXML
 	private void getButtonID(Button button){
 		String buttonID = button.getId().toString();
