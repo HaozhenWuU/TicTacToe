@@ -33,7 +33,7 @@
       </Label>
       <MenuButton layoutX="493.0" layoutY="58.0" mnemonicParsing="false" text="Option">
         <items>
-          <MenuItem id="QuitButton" fx:id="QuitButton" mnemonicParsing="false" onAction="#quitButtonHandler" text="Quit" />
+          <MenuItem id="QuitButton" fx:id="QuitButton" mnemonicParsing="false" onAction="#quitHandler" text="Quit" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>

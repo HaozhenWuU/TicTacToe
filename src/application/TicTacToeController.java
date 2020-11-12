@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+
 public class TicTacToeController extends Main{
 	
 
@@ -30,15 +31,8 @@ public class TicTacToeController extends Main{
 			{2,4,6}
 	};
 
-	@FXML Button one;
-	@FXML Button two;
-	@FXML Button three;
-	@FXML Button four;
-	@FXML Button five;
-	@FXML Button six;
-	@FXML Button seven;
-	@FXML Button eight;
-	@FXML Button nine;
+
+
 
 	private boolean isXTurn = true;
 
@@ -66,12 +60,26 @@ public class TicTacToeController extends Main{
 //
 //	}
 
+
+	/**
+	 *
+	 * @param button
+	 * The tic tac toe game board is made up of 9 buttons, each is initially blank and clickable.
+	 * putCharacter places a character in the button and then removes the ability of the button to be clicked
+	 */
 	public void putCharacter(Button button) {
+		getButtonInfo(button);
+
 //		String buttonID = button.getId().toString();
 //		System.out.println(buttonID);
 //		one.getId()
 		String style = button.getStyle().toString();
 
+		//if XTurn is true, then we place an X in the box
+		//Otherwise Place the O
+		//Then disable the button so it cannot be clicked again, and set the opacity to 1,
+		// preventing the image from being greyed out
+		//Finally, set isXturn to the opposite of its current value so we can alternate between players
 		if(isXTurn){
 			button.setGraphic(new ImageView(new Image("file:src/resources/Cross.png")));
 			button.setDisable(true);
@@ -86,9 +94,10 @@ public class TicTacToeController extends Main{
 			isXTurn = !isXTurn;
 		}
 
-
 	}
+	//sets the current scene back to the home page
 	public void quit(){
+		//
 		try {
 			Pane root = (Pane) FXMLLoader.load(getClass().getResource("Home.fxml"));
 			Scene scene = new Scene(root,600,600);
@@ -98,6 +107,21 @@ public class TicTacToeController extends Main{
 			e.printStackTrace();
 		}
 	}
+
+
+	//All the buttons that make up the tic tac toe game board
+	@FXML Button one;
+	@FXML Button two;
+	@FXML Button three;
+	@FXML Button four;
+	@FXML Button five;
+	@FXML Button six;
+	@FXML Button seven;
+	@FXML Button eight;
+	@FXML Button nine;
+	//Event handlers for various buttons.
+	//buttons one through nine make up the tic tac toe game board
+	//Each handler is tied uniquely to its own button.
 	public void buttonOneEventHandler(){
 		putCharacter(one);
 	}
@@ -125,15 +149,24 @@ public class TicTacToeController extends Main{
 	public void buttonNineEventHandler(){
 		putCharacter(nine);
 	}
-	public void quitButtonHandler(){quit();};
+
+
+	//the event handler for the quit option
+	public void quitHandler(){quit();};
 
 
 
+	//was used for debugging. no need for it at the moment. Keeping for future use
 	@FXML
-	private void getButtonID(Button button){
+	private void getButtonInfo(Button button){
+		String bounds = button.getLayoutBounds().toString();
+		System.out.println(bounds);
+
 		String buttonID = button.getId().toString();
 		System.out.println(buttonID);
 	}
+
+
 	
  
 }
