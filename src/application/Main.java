@@ -12,13 +12,16 @@ import javafx.fxml.FXMLLoader;
 
 
 public class Main extends Application {
+	static Stage rootStage;
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Pane root = (Pane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			rootStage = primaryStage;
+			Pane root = (Pane)FXMLLoader.load(getClass().getResource("Home.fxml"));
 			Scene scene = new Scene(root,600,600);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			rootStage.setScene(scene);
+			rootStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
