@@ -6,8 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -99,8 +104,10 @@ private boolean winnerDeclared = false;
 				if(hasWinningCombination(xButtons)){
 					System.out.println("WINNER IS X");
 					board.setDisable(true);
+					winDialog();
 					winnerDeclared=true;
-					drawLineThroughWin();
+//					drawLineThroughWin();
+					
 
 
 				}
@@ -120,13 +127,16 @@ private boolean winnerDeclared = false;
 				if(hasWinningCombination(oButtons)) {
 					System.out.println("WINNER IS O");
 					board.setDisable(true);
+					winDialog();
 					winnerDeclared=true;
-					drawLineThroughWin();
+//					drawLineThroughWin();
+					
 
 				}
 			}
 		}
 		if(xButtons.size()+oButtons.size()==9 && !winnerDeclared){
+			tieDialog();
 			System.out.println("DRAW");
 		}
 
@@ -144,6 +154,21 @@ private boolean winnerDeclared = false;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/*2020.11.30 
+	 * 
+	 * restart the game when press the restrat button in the alert box.
+	 */
+	public void restart() {
+	    try {
+            Pane root = (Pane) FXMLLoader.load(getClass().getResource("TicTacToe.fxml"));
+            Scene scene = new Scene(root,600,600);
+            rootStage.setScene(scene);
+            rootStage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 	}
 
 	public void checkForAWinner(String s){
@@ -167,7 +192,7 @@ private boolean winnerDeclared = false;
 			List<Integer> subarray = arrayList.subList(i,i+3);
 			System.out.println("subarray.toString():");
 			System.out.println(subarray.toString());
-			//second for loop is for fist dimension of 2d winstate array
+			//second for loop is for first dimension of 2d winstate array
 			for(int j =0; j<winstate.length-1;j++){
 				System.out.println("winstate j");
 
@@ -321,5 +346,55 @@ private boolean winnerDeclared = false;
 //		Line line = new Line(startX,startY,endX,endY);
 //		board.getChildren().add(line);
 	}
- 
+	
+	/*11.30
+	 * 
+	 * pop up a winning dialog asking for quit or restart 
+	 * when press quit, it returns to home page
+	 * when press restart, it restart the game
+	 * 
+	 */
+	public void winDialog() {
+		Alert win = new Alert(AlertType.NONE,"Congratulation");
+		win.setTitle("Comfirmation");
+		win.setContentText("You won the game, do you want to reset?");
+		ButtonType restart = new ButtonType("Restart");
+		ButtonType quit = new ButtonType("Quit");  
+		win.getButtonTypes().setAll(restart,quit);
+		Optional<ButtonType>result = win.showAndWait();
+		if(result.isPresent() && result.get() == quit) {
+				quit();
+		}
+		else if(result.isPresent() && result.get() == restart) {
+			   restart();
+			   }
+		}
+
+	
+	/*11.30
+	 * 
+	 * pop up a tie dialog asking for quit or restart  
+	 * when press quit, it returns to home page
+	 * when press restart, it restart the game
+	 * 
+	 */
+	public void tieDialog() {
+		Alert win = new Alert(AlertType.NONE, "Tie");
+		win.setTitle("Comfirmation");
+		win.setContentText("The game ends in a tie, do you want to reset?");
+		ButtonType restart = new ButtonType("Restart");
+		ButtonType quit = new ButtonType("Quit");
+		win.getButtonTypes().setAll(restart, quit);
+		Optional<ButtonType> result = win.showAndWait();
+		if (result.isPresent() && result.get() == quit) {
+			quit();
+		} else if (result.isPresent() && result.get() == restart) {
+			restart();
+		}
+		
+		
+	}
+	
+	
+
 }
