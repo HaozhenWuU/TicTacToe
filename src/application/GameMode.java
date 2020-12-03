@@ -15,7 +15,7 @@ public class GameMode extends Main {
     	 * 
     	 */
         try {
-            Pane root = (Pane) FXMLLoader.load(getClass().getResource("TicTacToe.fxml"));
+            Pane root = (Pane) FXMLLoader.load(getClass().getResource("MultiPlayer.fxml"));
             Scene scene = new Scene(root,600,600);
             rootStage.setScene(scene);
             rootStage.show();
@@ -34,7 +34,7 @@ public class GameMode extends Main {
     
     public void goToSingleGame() {
     	  try {
-              Pane root = (Pane) FXMLLoader.load(getClass().getResource("TicTacToe2.fxml"));
+              Pane root = (Pane) FXMLLoader.load(getClass().getResource("SinglePlayer.fxml"));
               Scene scene = new Scene(root,600,600);
               rootStage.setScene(scene);
               rootStage.show();

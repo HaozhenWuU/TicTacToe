@@ -165,7 +165,7 @@ private boolean winnerDeclared = false;
 	 */
 	public void restart() {
 	    try {
-            Pane root = (Pane) FXMLLoader.load(getClass().getResource("TicTacToe.fxml"));
+            Pane root = (Pane) FXMLLoader.load(getClass().getResource("MultiPlayer.fxml"));
             Scene scene = new Scene(root,600,600);
             rootStage.setScene(scene);
             rootStage.show();

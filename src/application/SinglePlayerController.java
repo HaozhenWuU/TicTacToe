@@ -241,7 +241,7 @@ public void putCharacter(Button button) {
 	 */
 	public void restart() {
 	    try {
-            Pane root = (Pane) FXMLLoader.load(getClass().getResource("TicTacToe2.fxml"));
+            Pane root = (Pane) FXMLLoader.load(getClass().getResource("SinglePlayer.fxml"));
             Scene scene = new Scene(root,600,600);
             rootStage.setScene(scene);
             rootStage.show();
