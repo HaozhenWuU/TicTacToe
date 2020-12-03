@@ -42,6 +42,7 @@ public class TicTacToeController extends Main{
 ArrayList<Integer> xButtons = new ArrayList<Integer>();
 ArrayList<Integer> oButtons = new ArrayList<Integer>();
 ArrayList<Integer> winningButtons = new ArrayList<Integer>();
+
 private boolean isXTurn = true;
 private boolean winnerDeclared = false;
 
@@ -103,6 +104,7 @@ private boolean winnerDeclared = false;
 			if(xButtons.size()>=3){
 				if(hasWinningCombination(xButtons)){
 					System.out.println("WINNER IS X");
+					setUncheckedButtonOpacities();
 					board.setDisable(true);
 					winDialog();
 					winnerDeclared=true;
@@ -126,8 +128,9 @@ private boolean winnerDeclared = false;
 
 				if(hasWinningCombination(oButtons)) {
 					System.out.println("WINNER IS O");
+					setUncheckedButtonOpacities();
 					board.setDisable(true);
-					winDialog();
+					winDialog2();
 					winnerDeclared=true;
 //					drawLineThroughWin();
 					
@@ -179,7 +182,6 @@ private boolean winnerDeclared = false;
 
 		}
 	}
-
 	public boolean hasWinningCombination(ArrayList<Integer> arrayList){
 
 		//Compare each subaray of length 3 in arrayList to each array in winstate
@@ -192,8 +194,8 @@ private boolean winnerDeclared = false;
 			List<Integer> subarray = arrayList.subList(i,i+3);
 			System.out.println("subarray.toString():");
 			System.out.println(subarray.toString());
-			//second for loop is for first dimension of 2d winstate array
-			for(int j =0; j<winstate.length-1;j++){
+			//second for loop is for fist dimension of 2d winstate array
+			for(int j =0; j<winstate.length;j++){
 				System.out.println("winstate j");
 
 				//3rd for loop is for 2nd dimension of 2d winstate array
@@ -228,7 +230,6 @@ private boolean winnerDeclared = false;
 		return false;
 
 	}
-
 	//All the buttons that make up the tic tac toe game board
 	@FXML Button one;
 	@FXML Button two;
@@ -357,7 +358,22 @@ private boolean winnerDeclared = false;
 	public void winDialog() {
 		Alert win = new Alert(AlertType.NONE,"Congratulation");
 		win.setTitle("Comfirmation");
-		win.setContentText("You won the game, do you want to reset?");
+		win.setContentText("Player 1 has won the game, do you want to reset?");
+		ButtonType restart = new ButtonType("Restart");
+		ButtonType quit = new ButtonType("Quit");  
+		win.getButtonTypes().setAll(restart,quit);
+		Optional<ButtonType>result = win.showAndWait();
+		if(result.isPresent() && result.get() == quit) {
+				quit();
+		}
+		else if(result.isPresent() && result.get() == restart) {
+			   restart();
+			   }
+		}
+	public void winDialog2() {
+		Alert win = new Alert(AlertType.NONE,"Congratulation");
+		win.setTitle("Comfirmation");
+		win.setContentText("Player 2 has won the game, do you want to reset?");
 		ButtonType restart = new ButtonType("Restart");
 		ButtonType quit = new ButtonType("Quit");  
 		win.getButtonTypes().setAll(restart,quit);
@@ -393,6 +409,20 @@ private boolean winnerDeclared = false;
 		}
 		
 		
+	}
+	
+	public void setUncheckedButtonOpacities(){
+		ArrayList<Integer> unClickedButtons = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+		ArrayList<Integer> checkButtons = new ArrayList<Integer>();
+		checkButtons.addAll(xButtons);
+		checkButtons.addAll(oButtons);
+		for(int i = 0; i < checkButtons.size(); i++)
+		{
+			unClickedButtons.remove(unClickedButtons.indexOf(checkButtons.get(i)));
+		}
+		for(int i = 0; i< unClickedButtons.size(); i++){
+			intToButton(unClickedButtons.get(i)).setOpacity(1);
+		}
 	}
 	
 	
