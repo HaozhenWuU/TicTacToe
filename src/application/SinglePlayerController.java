@@ -99,7 +99,11 @@ public void putCharacter(Button button) {
 				board.setDisable(true);
 				setUncheckedButtonOpacities();
 				winnerDeclared=true;
-//				drawLineThroughWin();
+
+				ScoreTracker.player1Score+=1;
+				ScoreTracker.writeToFile();
+
+
 				return;
 
 			}
@@ -208,7 +212,10 @@ public void putCharacter(Button button) {
 				board.setDisable(true);
 				setUncheckedButtonOpacities();
 				winnerDeclared=true;
-//				drawLineThroughWin();
+
+				ScoreTracker.player2Score+=1;
+				ScoreTracker.writeToFile();
+
 				return;
 			}
 		}

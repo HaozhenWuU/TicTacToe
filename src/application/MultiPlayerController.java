@@ -1,17 +1,15 @@
 package application;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +18,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 import java.util.*;
 
 public class MultiPlayerController extends Main{
@@ -78,6 +80,10 @@ private boolean winnerDeclared = false;
 	 * putCharacter places a character in the button and then removes the ability of the button to be clicked
 	 */
 	public void putCharacter(Button button) {
+		System.out.println("button was clicked");
+
+//		player2TextField.setText("THIS SHOULD BE HERE");
+
 		getButtonInfo(button);
 
 //		String buttonID = button.getId().toString();
@@ -103,13 +109,13 @@ private boolean winnerDeclared = false;
 
 			if(xButtons.size()>=3){
 				if(hasWinningCombination(xButtons)){
+					ScoreTracker.player1Score= ScoreTracker.player1Score+1;
+					int dummy =1;
 					System.out.println("WINNER IS X");
 					setUncheckedButtonOpacities();
 					board.setDisable(true);
 					winDialog();
 					winnerDeclared=true;
-//					drawLineThroughWin();
-					
 
 
 				}
@@ -127,12 +133,13 @@ private boolean winnerDeclared = false;
 			if(oButtons.size()>=3){
 
 				if(hasWinningCombination(oButtons)) {
+					ScoreTracker.player2Score= ScoreTracker.player2Score+1;
 					System.out.println("WINNER IS O");
 					setUncheckedButtonOpacities();
 					board.setDisable(true);
 					winDialog2();
 					winnerDeclared=true;
-//					drawLineThroughWin();
+
 					
 
 				}
@@ -148,6 +155,11 @@ private boolean winnerDeclared = false;
 	}
 	//sets the current scene back to the home page
 	public void quit(){
+		ScoreTracker.writeToFile();
+		ScoreTracker.player1Score=0;
+		ScoreTracker.player2Score=0;
+		ScoreTracker.player1Name = "Default 1";
+		ScoreTracker.player2Name = "Default 2";
 		//
 		try {
 			Pane root = (Pane) FXMLLoader.load(getClass().getResource("Home.fxml"));
@@ -161,18 +173,40 @@ private boolean winnerDeclared = false;
 	
 	/*2020.11.30 
 	 * 
-	 * restart the game when press the restrat button in the alert box.
+	 * restart the game when press the restart button in the alert box.
 	 */
 	public void restart() {
 	    try {
-            Pane root = (Pane) FXMLLoader.load(getClass().getResource("MultiPlayer.fxml"));
+
+//	    	resetBoard();
+            Pane root = (Pane) FXMLLoader.load(this.getClass().getResource("MultiPlayer.fxml"));
+
+//            root.getChildren().
             Scene scene = new Scene(root,600,600);
+
             rootStage.setScene(scene);
+
+
+//			player1TextLabel.textProperty().bind(player1Name);
+//			player2TextLabel.textProperty().bind(player2Name);
+//			player1Name.set(ScoreTracker.player1Name);
+//			player2Name.set(ScoreTracker.player2Name);
+//			setNames();
+
             rootStage.show();
+
+
+//            Thread.sleep(5000);
+
+
+
         } catch(Exception e) {
             e.printStackTrace();
         }
+
+
 	}
+
 
 	public void checkForAWinner(String s){
 
@@ -241,6 +275,14 @@ private boolean winnerDeclared = false;
 	@FXML Button eight;
 	@FXML Button nine;
 	@FXML GridPane board;
+	@FXML TextField player1TextField;
+	@FXML TextField player2TextField;
+	@FXML Label player1TextLabel;
+	@FXML Label player2TextLabel;
+
+	private final StringProperty player1Name = new SimpleStringProperty();
+	private final StringProperty player2Name = new SimpleStringProperty();
+
 	//Event handlers for various buttons.
 	//buttons one through nine make up the tic tac toe game board
 	//Each handler is tied uniquely to its own button.
@@ -270,12 +312,32 @@ private boolean winnerDeclared = false;
 	}
 	public void buttonNineEventHandler(){
 		putCharacter(nine);
+//		player1TextField.setText("THIS IS HERE IDK WHY");
 	}
 
+
+	public void setNames(){
+		player1TextField.setText(ScoreTracker.player1Name);
+		player2TextField.setText(ScoreTracker.player2Name);
+
+
+		System.out.println("Player 1 text field after reset: "+player1TextField.getText());
+
+		System.out.println("Player 2 text field after reset: "+player2TextField.getText());
+	}
 
 	//the event handler for the quit option
 	public void quitHandler(){quit();};
 
+	public void updatePlayer1String(){
+		ScoreTracker.player1Name=player1TextField.getText();
+		player1TextLabel.textProperty().set(ScoreTracker.player1Name);
+
+	}
+	public void updatePlayer2String(){
+		ScoreTracker.player2Name=player2TextField.getText();
+		player2TextLabel.textProperty().set(ScoreTracker.player2Name);
+	}
 
 
 	//was used for debugging. no need for it at the moment. Keeping for future use
@@ -424,7 +486,22 @@ private boolean winnerDeclared = false;
 			intToButton(unClickedButtons.get(i)).setOpacity(1);
 		}
 	}
-	
+
+	public void resetBoard(){
+		ArrayList<Integer> allButtons = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+		for(int i = 0; i< allButtons.size(); i++){
+			intToButton(allButtons.get(i)).setGraphic(null);
+			intToButton(allButtons.get(i)).setDisable(true);
+			intToButton(allButtons.get(i)).setDisable(false);
+
+//			intToButton(allButtons.get(i)).disableProperty().set(true);
+//			intToButton(allButtons.get(i)).disableProperty().set(false);
+//			intToButton(allButtons.get(i)).setStyle(null);
+
+			System.out.println("Disabled property: "+intToButton(allButtons.get(i)).disableProperty().getValue());
+
+		}
+	}
 	
 
 }
