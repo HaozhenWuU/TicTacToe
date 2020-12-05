@@ -272,11 +272,27 @@ private boolean winnerDeclared = false;
 		putCharacter(nine);
 	}
 
-
-	//the event handler for the quit option
-	public void quitHandler(){quit();};
-
-
+	
+	/* The event handler for the quit option.
+	 * When the player choose to quit the game,
+	 * a warning would present to confirm if 
+	 * the player wants to quit.
+	 * 
+	 */
+	public void quitHandler(){
+		Alert warn = new Alert(AlertType.WARNING);
+		warn.setHeaderText("Warning!");
+		warn.setContentText("Do you want to quit the game?");
+		ButtonType yes = new ButtonType("Yes");
+		ButtonType no = new ButtonType("No");
+		warn.getButtonTypes().setAll(yes, no);
+		Optional<ButtonType> result = warn.showAndWait();
+		if (result.isPresent() && result.get() == yes) {
+			quit();
+		} else if (result.isPresent() && result.get() == no) {
+			warn.close();
+		}	
+    }
 
 	//was used for debugging. no need for it at the moment. Keeping for future use
 	@FXML
@@ -325,28 +341,6 @@ private boolean winnerDeclared = false;
 		}
 	}
 
-	//Work in progress.
-	public void drawLineThroughWin(){
-//		Button start = intToButton(winningButtons.get(0));
-//		Button end = intToButton(winningButtons.get(2));
-//		Bounds startBounds = start.localToScene(start.getBoundsInLocal());
-//		Bounds endBounds = end.localToScene(end.getBoundsInLocal());
-//
-//		double minStartX =
-//
-////		double startX = startBounds.getMaxX();
-////		double minStartX = startBounds.getMinX();
-////		double startY = startBounds.getMaxY();
-////		double minStartY = startBounds.getMinY();
-////
-////
-////		double endX = endBounds.getMaxX();
-////
-////		double endY = endBounds.getMaxY();
-//
-//		Line line = new Line(startX,startY,endX,endY);
-//		board.getChildren().add(line);
-	}
 	
 	/*11.30
 	 * 
