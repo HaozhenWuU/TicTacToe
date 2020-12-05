@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScoresPageController">
+   <children>
+      <ListView fx:id="scoreList" layoutX="130.0" layoutY="36.0" prefHeight="328.0" prefWidth="341.0" />
+      <Label alignment="CENTER" layoutX="243.0" prefHeight="37.0" prefWidth="114.0" text="Scores" />
+      <Button fx:id="renderScoresButton" layoutX="231.0" layoutY="364.0" mnemonicParsing="false" onMouseClicked="#renderScores" text="Click to Show Scores" />
+      <Button fx:id="back" layoutX="268.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#back" text="Back" />
+   </children>
+</Pane>

@@ -32,4 +32,15 @@ public class HomeController extends Main{
         goToPlay();
     }
 
+    public void goToScores(){
+        try {
+            Pane root = (Pane) FXMLLoader.load(getClass().getResource("Scores.fxml"));
+            Scene scene = new Scene(root,600,600);
+            rootStage.setScene(scene);
+            rootStage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

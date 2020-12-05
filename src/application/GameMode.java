@@ -47,5 +47,16 @@ public class GameMode extends Main {
         goToSingleGame();
     }
 
+    public void back(){
+        try {
+            Pane root = (Pane) FXMLLoader.load(getClass().getResource("Home.fxml"));
+            Scene scene = new Scene(root,600,600);
+            rootStage.setScene(scene);
+            rootStage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

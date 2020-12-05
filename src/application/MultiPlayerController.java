@@ -327,7 +327,7 @@ private boolean winnerDeclared = false;
 	}
 
 	//the event handler for the quit option
-	public void quitHandler(){quit();};
+//	public void quitHandler(){quit();};
 
 	/* The event handler for the quit option.
 	 * When the player choose to quit the game,
