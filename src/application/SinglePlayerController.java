@@ -114,7 +114,6 @@ public void putCharacter(Button button) {
 				setUncheckedButtonOpacities();
 				winnerDeclared=true;
 
-				ScoreTracker.writeToFile();
 
 
 				return;
@@ -226,7 +225,6 @@ public void putCharacter(Button button) {
 				board.setDisable(true);
 				setUncheckedButtonOpacities();
 				winnerDeclared=true;
-				ScoreTracker.writeToFile();
 
 				return;
 			}
