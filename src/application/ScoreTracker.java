@@ -6,11 +6,11 @@ import java.util.Timer;
 
 public class ScoreTracker {
 
-    public static String player1Name="default";
+    public static String player1Name="Player 1";
     public static int player1Score=0;
-    public static String player2Name="default 2";
+    public static String player2Name="Player 2";
     public static int player2Score= 0;
-
+    public static boolean customNamesProvided = false;
     public static void writeToFile(){
 
         String currentPath = System.getProperty("user.dir");

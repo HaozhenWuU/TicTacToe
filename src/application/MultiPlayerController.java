@@ -47,6 +47,17 @@ ArrayList<Integer> winningButtons = new ArrayList<Integer>();
 
 private boolean isXTurn = true;
 private boolean winnerDeclared = false;
+private boolean scoreAndNameInitialized = false;
+
+public void onMouseMove(){
+	if(!scoreAndNameInitialized && ScoreTracker.customNamesProvided){
+		player1TextLabel.setText(ScoreTracker.player1Name);
+		player2TextLabel.setText(ScoreTracker.player2Name);
+		player1WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player1Score));
+		player2WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player2Score));
+		scoreAndNameInitialized=true;
+	}
+}
 
 	//This is a working implementation of Multiplayer (without win logic)
 //	public void putCharacter(Button button) {
@@ -158,8 +169,10 @@ private boolean winnerDeclared = false;
 		ScoreTracker.writeToFile();
 		ScoreTracker.player1Score=0;
 		ScoreTracker.player2Score=0;
-		ScoreTracker.player1Name = "Default 1";
-		ScoreTracker.player2Name = "Default 2";
+		ScoreTracker.player1Name = "Player 1";
+		ScoreTracker.player2Name = "Player 2";
+		scoreAndNameInitialized=false;
+
 		//
 		try {
 			Pane root = (Pane) FXMLLoader.load(getClass().getResource("Home.fxml"));
@@ -194,6 +207,8 @@ private boolean winnerDeclared = false;
 //			setNames();
 
             rootStage.show();
+
+            scoreAndNameInitialized=false;
 
 
 //            Thread.sleep(5000);
@@ -279,6 +294,8 @@ private boolean winnerDeclared = false;
 	@FXML TextField player2TextField;
 	@FXML Label player1TextLabel;
 	@FXML Label player2TextLabel;
+	@FXML Label player1WinLabel;
+	@FXML Label player2WinLabel;
 
 	private final StringProperty player1Name = new SimpleStringProperty();
 	private final StringProperty player2Name = new SimpleStringProperty();
@@ -350,14 +367,16 @@ private boolean winnerDeclared = false;
 		}
     }
 
+
 	public void updatePlayer1String(){
 		ScoreTracker.player1Name=player1TextField.getText();
 		player1TextLabel.textProperty().set(ScoreTracker.player1Name);
-
+		ScoreTracker.customNamesProvided=true;
 	}
 	public void updatePlayer2String(){
 		ScoreTracker.player2Name=player2TextField.getText();
 		player2TextLabel.textProperty().set(ScoreTracker.player2Name);
+		ScoreTracker.customNamesProvided=true;
 	}
 
 
