@@ -56,25 +56,29 @@ public void onMouseMove(){
 		player1WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player1Score));
 		player2WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player2Score));
 		scoreAndNameInitialized=true;
+	}else if(!scoreAndNameInitialized){
+		player1WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player1Score));
+		player2WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player2Score));
+		scoreAndNameInitialized=true;
 	}
 }
 
 
 //All the buttons that make up the tic tac toe game board
-@FXML Button one;
-@FXML Button two;
-@FXML Button three;
-@FXML Button four;
-@FXML Button five;
-@FXML Button six;
-@FXML Button seven;
-@FXML Button eight;
-@FXML Button nine;
-@FXML GridPane board;
-@FXML TextField player1TextField;
-@FXML TextField player2TextField;
-@FXML Label player1TextLabel;
-@FXML Label player2TextLabel;
+//@FXML Button one;
+//@FXML Button two;
+//@FXML Button three;
+//@FXML Button four;
+//@FXML Button five;
+//@FXML Button six;
+//@FXML Button seven;
+//@FXML Button eight;
+//@FXML Button nine;
+//@FXML GridPane board;
+//@FXML TextField player1TextField;
+//@FXML TextField player2TextField;
+//@FXML Label player1TextLabel;
+//@FXML Label player2TextLabel;
 
 	//This is a working implementation of Multiplayer (without win logic)
 //	public void putCharacter(Button button) {

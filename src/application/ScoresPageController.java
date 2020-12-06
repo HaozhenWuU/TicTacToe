@@ -59,7 +59,7 @@ public class ScoresPageController extends Main{
                     scanner.close();
 
                     String score = "Player 1: "+ dataInFile.get(0)+" \t\tScore: "+ dataInFile.get(1)
-                            +" \tPlayer 2: "+ dataInFile.get(2) +" \t\tScore: " + dataInFile.get(3);
+                            +" \t\tPlayer 2: "+ dataInFile.get(2) +" \t\tScore: " + dataInFile.get(3);
                     observableList.add(score);
 
 

@@ -6,11 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -46,6 +43,20 @@ ArrayList<Integer> unClickedButtons = new ArrayList<>(
 
 private boolean winnerDeclared = false;
 
+	private boolean scoreAndNameInitialized = false;
+
+	public void onMouseMove(){
+		if(!scoreAndNameInitialized && ScoreTracker.customNamesProvided){
+			player1TextLabel.setText(ScoreTracker.player1Name);
+			player1WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player1Score));
+			player2WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player2Score));
+			scoreAndNameInitialized=true;
+		}else if(!scoreAndNameInitialized){
+			player1WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player1Score));
+			player2WinLabel.setText("Wins: "+ Integer.toString(ScoreTracker.player2Score));
+			scoreAndNameInitialized=true;
+		}
+	}
 	//This is a working implementation of Multiplayer (without win logic)
 //	public void putCharacter(Button button) {
 ////		String buttonID = button.getId().toString();
@@ -96,13 +107,13 @@ public void putCharacter(Button button) {
 
 		if(xButtons.size()>=3){
 			if(hasWinningCombination(xButtons)){
+				ScoreTracker.player1Score= ScoreTracker.player1Score+1;
 				System.out.println("WINNER IS X");
 				winDialog();
 				board.setDisable(true);
 				setUncheckedButtonOpacities();
 				winnerDeclared=true;
 
-				ScoreTracker.player1Score+=1;
 				ScoreTracker.writeToFile();
 
 
@@ -209,13 +220,12 @@ public void putCharacter(Button button) {
 		if(oButtons.size()>=3){
 
 			if(hasWinningCombination(oButtons)) {
+				ScoreTracker.player2Score= ScoreTracker.player2Score+1;
 				System.out.println("WINNER IS O");
 				loseDialog();
 				board.setDisable(true);
 				setUncheckedButtonOpacities();
 				winnerDeclared=true;
-
-				ScoreTracker.player2Score+=1;
 				ScoreTracker.writeToFile();
 
 				return;
@@ -233,6 +243,14 @@ public void putCharacter(Button button) {
 }
 	//sets the current scene back to the home page
 	public void quit(){
+		ScoreTracker.player2Name = "CPU";
+		ScoreTracker.writeToFile();
+		ScoreTracker.player1Score=0;
+		ScoreTracker.player2Score=0;
+		ScoreTracker.player1Name = "Player 1";
+		ScoreTracker.player2Name = "Player 2";
+		scoreAndNameInitialized=false;
+
 		//
 		try {
 			Pane root = (Pane) FXMLLoader.load(getClass().getResource("Home.fxml"));
@@ -254,7 +272,9 @@ public void putCharacter(Button button) {
             Scene scene = new Scene(root,600,600);
             rootStage.setScene(scene);
             rootStage.show();
-        } catch(Exception e) {
+			scoreAndNameInitialized=false;
+
+		} catch(Exception e) {
             e.printStackTrace();
         }
 	}
@@ -341,6 +361,11 @@ public void putCharacter(Button button) {
 	@FXML Button eight;
 	@FXML Button nine;
 	@FXML GridPane board;
+	@FXML TextField player1TextField;
+	@FXML Label player1TextLabel;
+	@FXML Label player1WinLabel;
+	@FXML Label player2WinLabel;
+
 	//Event handlers for various buttons.
 	//buttons one through nine make up the tic tac toe game board
 	//Each handler is tied uniquely to its own button.
@@ -393,6 +418,12 @@ public void putCharacter(Button button) {
 			warn.close();
 		}
     }
+
+	public void updatePlayer1String(){
+		ScoreTracker.player1Name=player1TextField.getText();
+		player1TextLabel.textProperty().set(ScoreTracker.player1Name);
+		ScoreTracker.customNamesProvided=true;
+	}
 
 
 
