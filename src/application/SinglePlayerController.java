@@ -258,6 +258,19 @@ public void putCharacter(Button button) {
             e.printStackTrace();
         }
 	}
+	
+	
+	public void backHandler() {
+		try {
+			Pane root = (Pane) FXMLLoader.load(getClass().getResource("GameMode.fxml"));
+			Scene scene = new Scene(root, 600, 600);
+			rootStage.setScene(scene);
+			rootStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public void checkForAWinner(String s){
 

@@ -59,6 +59,23 @@ public void onMouseMove(){
 	}
 }
 
+
+//All the buttons that make up the tic tac toe game board
+@FXML Button one;
+@FXML Button two;
+@FXML Button three;
+@FXML Button four;
+@FXML Button five;
+@FXML Button six;
+@FXML Button seven;
+@FXML Button eight;
+@FXML Button nine;
+@FXML GridPane board;
+@FXML TextField player1TextField;
+@FXML TextField player2TextField;
+@FXML Label player1TextLabel;
+@FXML Label player2TextLabel;
+
 	//This is a working implementation of Multiplayer (without win logic)
 //	public void putCharacter(Button button) {
 ////		String buttonID = button.getId().toString();
@@ -194,10 +211,11 @@ public void onMouseMove(){
 //	    	resetBoard();
             Pane root = (Pane) FXMLLoader.load(this.getClass().getResource("MultiPlayer.fxml"));
 
-//            root.getChildren().
+//          root.getChildren().
             Scene scene = new Scene(root,600,600);
 
             rootStage.setScene(scene);
+
 
 
 //			player1TextLabel.textProperty().bind(player1Name);
@@ -219,6 +237,19 @@ public void onMouseMove(){
             e.printStackTrace();
         }
 
+
+	}
+
+
+	public void backHandler() {
+		try {
+			Pane root = (Pane) FXMLLoader.load(getClass().getResource("GameMode.fxml"));
+			Scene scene = new Scene(root, 600, 600);
+			rootStage.setScene(scene);
+			rootStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -279,6 +310,8 @@ public void onMouseMove(){
 		return false;
 
 	}
+
+
 	//All the buttons that make up the tic tac toe game board
 	@FXML Button one;
 	@FXML Button two;
@@ -438,7 +471,7 @@ public void onMouseMove(){
 	public void winDialog() {
 		Alert win = new Alert(AlertType.NONE,"Congratulation");
 		win.setTitle("Comfirmation");
-		win.setContentText("Player 1 has won the game, do you want to reset?");
+		win.setContentText("Player " + ScoreTracker.player1Name + " has won the game, do you want to reset?");
 		ButtonType restart = new ButtonType("Restart");
 		ButtonType quit = new ButtonType("Quit");  
 		win.getButtonTypes().setAll(restart,quit);
@@ -453,7 +486,7 @@ public void onMouseMove(){
 	public void winDialog2() {
 		Alert win = new Alert(AlertType.NONE,"Congratulation");
 		win.setTitle("Comfirmation");
-		win.setContentText("Player 2 has won the game, do you want to reset?");
+		win.setContentText("Player "+ ScoreTracker.player2Name + " has won the game, do you want to reset?");
 		ButtonType restart = new ButtonType("Restart");
 		ButtonType quit = new ButtonType("Quit");  
 		win.getButtonTypes().setAll(restart,quit);
