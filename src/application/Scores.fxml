@@ -8,16 +8,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="600.0" style="-fx-background-color: #3d4956;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScoresPageController">
    <children>
-      <ListView fx:id="scoreList" layoutX="38.0" layoutY="50.0" prefHeight="306.0" prefWidth="524.0" />
+      <ListView fx:id="scoreList" layoutX="38.0" layoutY="50.0" prefHeight="306.0" prefWidth="524.0" style="-fx-border-width: 5; -fx-border-color: #eda678;" stylesheets="@../resources/style.css" />
       <Label alignment="CENTER" layoutX="243.0" prefHeight="37.0" prefWidth="114.0" text="Scores" textFill="WHITE">
          <font>
             <Font name="System Bold" size="23.0" />
          </font></Label>
-      <Button fx:id="renderScoresButton" layoutX="90.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#renderScores" prefHeight="40.0" prefWidth="210.0" stylesheets="@../resources/style.css" text="Click to Show Scores">
+      <Button fx:id="renderScoresButton" layoutX="90.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#renderScores" prefHeight="40.0" prefWidth="210.0" stylesheets="@style.css" text="Click to Show Scores">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="back" layoutX="357.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="40.0" prefWidth="120.0" stylesheets="@../resources/style.css" text="Back">
+      <Button fx:id="back" layoutX="357.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="40.0" prefWidth="120.0" stylesheets="@style.css" text="Back">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
