@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #8C4C3D;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MultiPlayerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #8C4C3D;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MultiPlayerController">
    <children>
       <Label alignment="CENTER" layoutX="194.0" layoutY="43.0" prefHeight="79.0" prefWidth="213.0" text="Tic-Tac-Toe" textAlignment="JUSTIFY" textFill="#ff8080">
          <font>
@@ -33,6 +40,7 @@
       </Label>
       <MenuButton layoutX="493.0" layoutY="58.0" mnemonicParsing="false" text="Option">
         <items>
+            <MenuItem fx:id="Back" mnemonicParsing="false" onAction="#backHandler" text="Back" />
           <MenuItem id="QuitButton" fx:id="QuitButton" mnemonicParsing="false" onAction="#quitHandler" text="Quit" />
           <MenuItem mnemonicParsing="false" onAction="#restart" text="Restart" />
         </items>

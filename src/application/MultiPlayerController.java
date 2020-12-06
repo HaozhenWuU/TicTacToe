@@ -48,6 +48,23 @@ ArrayList<Integer> winningButtons = new ArrayList<Integer>();
 private boolean isXTurn = true;
 private boolean winnerDeclared = false;
 
+
+//All the buttons that make up the tic tac toe game board
+@FXML Button one;
+@FXML Button two;
+@FXML Button three;
+@FXML Button four;
+@FXML Button five;
+@FXML Button six;
+@FXML Button seven;
+@FXML Button eight;
+@FXML Button nine;
+@FXML GridPane board;
+@FXML TextField player1TextField;
+@FXML TextField player2TextField;
+@FXML Label player1TextLabel;
+@FXML Label player2TextLabel;
+
 	//This is a working implementation of Multiplayer (without win logic)
 //	public void putCharacter(Button button) {
 ////		String buttonID = button.getId().toString();
@@ -181,11 +198,12 @@ private boolean winnerDeclared = false;
 //	    	resetBoard();
             Pane root = (Pane) FXMLLoader.load(this.getClass().getResource("MultiPlayer.fxml"));
 
-//            root.getChildren().
+//          root.getChildren().
             Scene scene = new Scene(root,600,600);
 
             rootStage.setScene(scene);
-
+            
+            
 
 //			player1TextLabel.textProperty().bind(player1Name);
 //			player2TextLabel.textProperty().bind(player2Name);
@@ -204,6 +222,19 @@ private boolean winnerDeclared = false;
             e.printStackTrace();
         }
 
+
+	}
+	
+	
+	public void backHandler() {
+		try {
+			Pane root = (Pane) FXMLLoader.load(getClass().getResource("GameMode.fxml"));
+			Scene scene = new Scene(root, 600, 600);
+			rootStage.setScene(scene);
+			rootStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -264,21 +295,8 @@ private boolean winnerDeclared = false;
 		return false;
 
 	}
-	//All the buttons that make up the tic tac toe game board
-	@FXML Button one;
-	@FXML Button two;
-	@FXML Button three;
-	@FXML Button four;
-	@FXML Button five;
-	@FXML Button six;
-	@FXML Button seven;
-	@FXML Button eight;
-	@FXML Button nine;
-	@FXML GridPane board;
-	@FXML TextField player1TextField;
-	@FXML TextField player2TextField;
-	@FXML Label player1TextLabel;
-	@FXML Label player2TextLabel;
+
+	
 
 	private final StringProperty player1Name = new SimpleStringProperty();
 	private final StringProperty player2Name = new SimpleStringProperty();
