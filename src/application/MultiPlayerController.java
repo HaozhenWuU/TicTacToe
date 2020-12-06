@@ -437,7 +437,7 @@ private boolean winnerDeclared = false;
 	public void winDialog() {
 		Alert win = new Alert(AlertType.NONE,"Congratulation");
 		win.setTitle("Comfirmation");
-		win.setContentText("Player 1 has won the game, do you want to reset?");
+		win.setContentText("Player " + ScoreTracker.player1Name + " has won the game, do you want to reset?");
 		ButtonType restart = new ButtonType("Restart");
 		ButtonType quit = new ButtonType("Quit");  
 		win.getButtonTypes().setAll(restart,quit);
@@ -452,7 +452,7 @@ private boolean winnerDeclared = false;
 	public void winDialog2() {
 		Alert win = new Alert(AlertType.NONE,"Congratulation");
 		win.setTitle("Comfirmation");
-		win.setContentText("Player 2 has won the game, do you want to reset?");
+		win.setContentText("Player "+ ScoreTracker.player2Name + " has won the game, do you want to reset?");
 		ButtonType restart = new ButtonType("Restart");
 		ButtonType quit = new ButtonType("Quit");  
 		win.getButtonTypes().setAll(restart,quit);
