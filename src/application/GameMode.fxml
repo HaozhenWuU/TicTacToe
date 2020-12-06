@@ -12,15 +12,15 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Button layoutX="229.0" layoutY="129.0" mnemonicParsing="false" onAction="#singleplayerButtonHandler" prefHeight="50.0" prefWidth="150.0" stylesheets="@../resources/style.css" text="Singleplayer">
+      <Button layoutX="229.0" layoutY="129.0" mnemonicParsing="false" onAction="#singleplayerButtonHandler" prefHeight="50.0" prefWidth="150.0" stylesheets="@style.css" text="Singleplayer">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button layoutX="229.0" layoutY="214.0" mnemonicParsing="false" onAction="#multiplayerButtonHandler" prefHeight="50.0" prefWidth="150.0" stylesheets="@../resources/style.css" text="Multiplayer">
+      <Button layoutX="229.0" layoutY="214.0" mnemonicParsing="false" onAction="#multiplayerButtonHandler" prefHeight="50.0" prefWidth="150.0" stylesheets="@style.css" text="Multiplayer">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button layoutX="260.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="36.0" prefWidth="92.0" stylesheets="@../resources/style.css" text="Back">
+      <Button layoutX="260.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="36.0" prefWidth="92.0" stylesheets="@style.css" text="Back">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
